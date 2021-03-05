@@ -6,6 +6,7 @@ const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 
+//Empty employee array
 const employees = [];
 
 //Array of questions to gather data
@@ -42,7 +43,13 @@ const addEmployeeQuestion = [
     }
 ];
 
-function newEmployee() {
+//Function to gather infor for new employee
+function add() {
+    employeeInfo();
+}
+
+//Function to get employee info
+function employeeInfo() {
     inquirer.prompt(employeeQuestions)
         .then(({ name, id, email, role }) => {
             let addtlInfo = '';
@@ -74,17 +81,18 @@ function newEmployee() {
                         newEmployee = new Intern(name, id, email, info);
                     }
                     employees.push(newEmployee);
-
+                    console.log(employees);
+                    
                     inquirer.prompt(addEmployeeQuestion)
                         .then(({ addEmployee }) => {
                             if (addEmployee) {
-                                console.log('Yes')
+                                add();
                             }
-                            else console.log('No')
-                            
                         });
                 });
-
         });
 }
-newEmployee();
+
+
+//Function to start app
+add();
