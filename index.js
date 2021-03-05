@@ -1,6 +1,12 @@
-//Include packages needed
+//Include packages and files needed
 const fs = require('fs');
 const inquirer = require('inquirer');
+
+const Manager = require('./lib/Manager');
+const Engineer = require('./lib/Engineer');
+const Intern = require('./lib/Intern');
+
+const employees = [];
 
 //Array of questions to gather data
 const employeeQuestions = [
@@ -36,26 +42,49 @@ const addEmployeeQuestion = [
     }
 ];
 
-const managerQuestions = [
-    {
-        type: 'input',
-        message: `What is the manager's office number?`,
-        name: 'office'
-    }
-];
-const engineerQuestions = [
-    {
-        type: 'input',
-        message: `What is the engineer's GitHub username?`,
-        name: 'gitHub'
-    }
-];
+function newEmployee() {
+    inquirer.prompt(employeeQuestions)
+        .then(({ name, id, email, role }) => {
+            let addtlInfo = '';
+            if (role === 'Manager') {
+                addtlInfo = 'office number';
+            }
+            if (role === 'Engineer') {
+                addtlInfo = 'GitHub username'
+            }
+            if (role === 'Intern') {
+                addtlInfo = 'school'
+            }
+            inquirer.prompt([
+                {
+                    type: 'input',
+                    message: `What is the ${role}'s ${addtlInfo}?`,
+                    name: 'info'
+                }
+            ])
+                .then(({ info }) => {
+                    let newEmployee;
+                    if (role === 'Manager') {
+                        newEmployee = new Manager(name, id, email, info);
+                    }
+                    if (role === 'Engineer') {
+                        newEmployee = new Engineer(name, id, email, info);
+                    }
+                    if (role === 'Intern') {
+                        newEmployee = new Intern(name, id, email, info);
+                    }
+                    employees.push(newEmployee);
 
-const internQuestions = [
-    {
-        type: 'input',
-        message:`What school does the intern attend?`,
-        name: 'school'
-    }
-];
+                    inquirer.prompt(addEmployeeQuestion)
+                        .then(({ addEmployee }) => {
+                            if (addEmployee) {
+                                console.log('Yes')
+                            }
+                            else console.log('No')
+                            
+                        });
+                });
 
+        });
+}
+newEmployee();
