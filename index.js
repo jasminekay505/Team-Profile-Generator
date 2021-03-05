@@ -3,27 +3,28 @@ const fs = require('fs');
 const inquirer = require('inquirer');
 
 //Array of questions to gather data
-const managerQuestions = [
+const employeeQuestions = [
     {
         type: 'input',
-        message: `What is the team manager's name?`,
-        name: 'managerName'
+        message: `What is the team members's name?`,
+        name: 'name'
     },
     {
         type: 'input',
-        message: `What is the team manager's employee ID nummber?`,
-        name: 'managerID'
+        message: `What is the team member's employee ID nummber?`,
+        name: 'id'
     },
     {
         type: 'input',
-        message: `What is the team manager's email address?`,
-        name: 'managerEmail'
+        message: `What is the team members's email address?`,
+        name: 'email'
     },
     {
-        type: 'input',
-        message: `What is the team manager's office number?`,
-        name: 'managerOffice'
-    },
+        type: 'list',
+        name: 'role',
+        message: 'What type of employee is this?',
+        choices: ['Manager', 'Engineer', 'Intern']
+    }
 
 ];
 
@@ -35,31 +36,14 @@ const addEmployeeQuestion = [
     }
 ];
 
-const newEmployee = [
+const managerQuestions = [
     {
-        type: 'list',
-        name: 'role',
-        message: 'What type of employee would you like to add?',
-        choices: ['Manager', 'Engineer', 'Intern']
+        type: 'input',
+        message: `What is the manager's office number?`,
+        name: 'office'
     }
 ];
-
 const engineerQuestions = [
-    {
-        type: 'input',
-        message: `What is the engineers's name?`,
-        name: 'engineerName'
-    },
-    {
-        type: 'input',
-        message: `What is the engineer's employee ID nummber?`,
-        name: 'engineerID'
-    },
-    {
-        type: 'input',
-        message: `What is the engineer's email address?`,
-        name: 'engineerEmail'
-    },
     {
         type: 'input',
         message: `What is the engineer's GitHub username?`,
@@ -70,40 +54,8 @@ const engineerQuestions = [
 const internQuestions = [
     {
         type: 'input',
-        message: `What is the intern's name?`,
-        name: 'internName'
-    },
-    {
-        type: 'input',
-        message: `What is the intern's employee ID nummber?`,
-        name: 'internID'
-    },
-    {
-        type: 'input',
-        message: `What is the intern's email address?`,
-        name: 'internEmail'
-    },
-    {
-        type: 'input',
         message:`What school does the intern attend?`,
         name: 'school'
     }
 ];
 
-//Function to write HTML file
-function writeToFile(response) { 
-    console.log(`Success! Your new HTML page has been created. It can be found at dist/${response.title}.html`);
-    return renderHTML(reseponse);
-}
-
-//Initialzie App
-function init() {
-    inquirer.prompt(questions).then((response) => { 
-        fs.writeFileSync(`${response.title}-README.md`, writeToFile(response), (err) => { 
-            err ? console.error(err) : console.log('Success! Your README file has been generated!')
-        })
-    })
- }
-
-// Function call to initialize app
-init();
