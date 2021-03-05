@@ -19,7 +19,7 @@ describe('getOfficeNumber', () => {
 describe('getRole', () => {
     it('should return Manager', () => {
         const role = 'Manager';
-        const newEmployee = new Employee('Jasmine', 20, 'myemail@gmail.com', 150);
-        expect(newEmployee.getRole()).toBe(role);
+        const newManager = new Manager('Jasmine', 20, 'myemail@gmail.com', 150);
+        expect(newManager.getRole()).toBe(role);
     });
 });

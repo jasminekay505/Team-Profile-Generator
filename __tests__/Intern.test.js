@@ -19,7 +19,7 @@ describe('getSchool', () => {
 describe('getRole', () => {
     it('should return Intern', () => {
         const role = 'Intern';
-        const newEmployee = new Employee('Jasmine', 20, 'myemail@gmail.com', 'UW');
-        expect(newEmployee.getRole()).toBe(role);
+        const newIntern = new Intern('Jasmine', 20, 'myemail@gmail.com', 'UW');
+        expect(newIntern.getRole()).toBe(role);
     });
 });

@@ -15,7 +15,7 @@ describe('Employee', () => {
     it('should assign a given number to id via constructor', () => {
         const id = 20;
         const newEmployee = new Employee('Jasmine', id);
-        expect(newEmployee.id.toBe(id));
+        expect(newEmployee.id).toBe(id);
     });
 
     it('should assign a given string to email via constructor', () => {

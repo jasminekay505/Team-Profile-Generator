@@ -19,7 +19,7 @@ describe('getGitHub', () => {
 describe('getRole', () => {
     it('should return Engineer', () => {
         const role = 'Engineer';
-        const newEmployee = new Employee('Jasmine', 20, 'myemail@gmail.com', 'jasminekay505');
-        expect(newEmployee.getRole()).toBe(role);
+        const newEngineer = new Engineer('Jasmine', 20, 'myemail@gmail.com', 'jasminekay505');
+        expect(newEngineer.getRole()).toBe(role);
     });
 });
