@@ -1,0 +1,27 @@
+{
+  "name": "team-profile-generator",
+  "version": "1.0.0",
+  "description": "Create an html page based on user input.",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jasminekay505/Team-Profile-Generator.git"
+  },
+  "author": "jasminekay505",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jasminekay505/Team-Profile-Generator/issues"
+  },
+  "homepage": "https://github.com/jasminekay505/Team-Profile-Generator#readme",
+  "devDependencies": {
+    "inquirer": "^7.3.3",
+    "jest": "^24.9.0"
+  }
+}
