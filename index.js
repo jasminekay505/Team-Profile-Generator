@@ -18,7 +18,7 @@ const employeeQuestions = [
     },
     {
         type: 'input',
-        message: `What is the team member's employee ID nummber?`,
+        message: `What is the team member's employee ID number?`,
         name: 'id'
     },
     {
