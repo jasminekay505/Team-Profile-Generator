@@ -23,8 +23,10 @@ https://drive.google.com/file/d/17hP_SqoBHHpOVJb_GFyr6NQVHTkXVjD4/view
 - Jest
 
 # Test
-Run tests to ensure that constructors are working as intended.
-*npm run test*   
+Run tests to ensure that constructors are working as intended.  
+*npm run test*  
+When all tests pass, terminal should look like this:  
+![image](https://user-images.githubusercontent.com/74380703/110190646-2f4eca00-7dd9-11eb-88ec-207750b1b7c0.png)  
 
 # Screenshots
 Sample HTML file:
