@@ -88,7 +88,7 @@ function employeeInfo() {
                         .then(({ addEmployee }) => {
                             if (addEmployee) {
                                 add();
-                            } else { 
+                            } else {
                                 endHTML();
                             }
                         });
@@ -122,7 +122,7 @@ function startHTML() {
             </div>
         </div>
         <div class="card-deck">`;
-    
+
     fs.writeFile('./dist/teamProfile.html', main, function (err) {
         if (err) {
             console.log(err);
@@ -194,20 +194,20 @@ function addCard(newEmployee) {
     });
 }
 
-function endHTML() { 
+function endHTML() {
     const main = ` </div>
     </body>
     
     </html>`;
-    fs.appendFile('./dist/teamProfile.html', main, function (err) { 
-        if (err) { 
+    fs.appendFile('./dist/teamProfile.html', main, function (err) {
+        if (err) {
             console.log(err);
         };
         console.log('HTML file is ready to go. It can be found in the dist folder.')
     });
 }
 //Function to start app
-function init () { 
+function init() {
     employeeInfo();
     startHTML();
 }
