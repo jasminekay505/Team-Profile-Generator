@@ -4,6 +4,7 @@
 This application uses command-line prompts to create a styled Team Profile HTML page to display basic roster information based on user input. The generated HTML page provides quick access to team emails, id numbers, and applicable information such as GitHub Profile for engineer or office numbers for Managers.
 
 # Link to video Demonstration of Application Usage
+https://drive.google.com/file/d/17hP_SqoBHHpOVJb_GFyr6NQVHTkXVjD4/view
 
 # Installation
 *npm install*  
@@ -26,7 +27,8 @@ Run tests to ensure that constructors are working as intended.
 *npm run test*   
 
 # Screenshots
-
+Sample HTML file:
+![image](https://user-images.githubusercontent.com/74380703/110190495-77212180-7dd8-11eb-94b8-32c09ec9ec3d.png)
 # License
 MIT
 

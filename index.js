@@ -82,7 +82,6 @@ function employeeInfo() {
                     }
                     employees.push(newEmployee);
                     addCard(newEmployee);
-                    console.log(employees);
 
                     inquirer.prompt(addEmployeeQuestion)
                         .then(({ addEmployee }) => {
