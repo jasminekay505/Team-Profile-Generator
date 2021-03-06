@@ -5,8 +5,6 @@ const inquirer = require('inquirer');
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
-const { rejects } = require('node:assert');
-const { resolve } = require('node:path');
 
 //Empty employee array
 const employees = [];
@@ -45,10 +43,9 @@ const addEmployeeQuestion = [
     }
 ];
 
-//Function to gather infor for new employee
+//Function to gather info for new employee
 function add() {
     employeeInfo();
-    startHTML();
 }
 
 //Function to get employee info
@@ -126,7 +123,6 @@ function startHTML() {
         </div>
         <div class="card-deck">`;
     
-    console.log("Starting HTML file.")
     fs.writeFile('./dist/teamProfile.html', main, function (err) {
         if (err) {
             console.log(err);
@@ -211,4 +207,8 @@ function endHTML() {
     });
 }
 //Function to start app
-add();
+function init () { 
+    employeeInfo();
+    startHTML();
+}
+init();
