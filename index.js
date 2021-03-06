@@ -5,6 +5,8 @@ const inquirer = require('inquirer');
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
+const { rejects } = require('node:assert');
+const { resolve } = require('node:path');
 
 //Empty employee array
 const employees = [];
@@ -46,6 +48,7 @@ const addEmployeeQuestion = [
 //Function to gather infor for new employee
 function add() {
     employeeInfo();
+    startHTML();
 }
 
 //Function to get employee info
@@ -81,20 +84,23 @@ function employeeInfo() {
                         newEmployee = new Intern(name, id, email, info);
                     }
                     employees.push(newEmployee);
+                    addCard(newEmployee);
                     console.log(employees);
 
                     inquirer.prompt(addEmployeeQuestion)
                         .then(({ addEmployee }) => {
                             if (addEmployee) {
                                 add();
+                            } else { 
+                                endHTML();
                             }
                         });
                 });
         });
 }
 
-//Function to write HTML
-function startHTML() { 
+//Functions to write HTML
+function startHTML() {
     const main = `<!DOCTYPE html>
     <html lang="en">
     
@@ -118,45 +124,91 @@ function startHTML() {
                 <h1 class="display-4">My Team</h1>
             </div>
         </div>
-        <div class="card-deck">
-        </div>`;
-
-        fs.writeFile('./dist/teamProfile.html', main, function(err) { 
-            if(err) { 
-                console.log(err);
-            }
-        });
+        <div class="card-deck">`;
+    
+    console.log("Starting HTML file.")
+    fs.writeFile('./dist/teamProfile.html', main, function (err) {
+        if (err) {
+            console.log(err);
+        }
+    });
 }
 
-function addCard(newEmployee) { 
-    const name = newEmployee.getName();
-    const id = newEmployee.getId();
-    const email = newEmployee.getEmail();
-    const role = newEmployee.getRole(); 
-    let card; 
+function addCard(newEmployee) {
+    return new Promise(function (res, rej) {
 
-    if (role === 'Manager') {
-        const office = newEmployee.getOfficeNumber();
-        card = `<div class="card">
-        <div class="card-header">
-            ${name}
-            <br>
-            <i class="fas fa-coffee"></i> ${role}
-        </div>
-        <div class="card-body">
-            <p class="cardtext">ID: ${id}</p>
-            <p class="cardtext">Email: <a href="mailto:${email}">${email}</a></p>
-            <p class="cardtext">Office Number: ${office}</p>
-        </div>
-    </div>`
-    }
-    if (role === 'Engineer') {
-        const gitHub = newEmployee.getGitHub();
-    }
-    if (role === 'Intern') {
-        const school = newEmployee.getSchool();
-    }
+        const name = newEmployee.getName();
+        const id = newEmployee.getId();
+        const email = newEmployee.getEmail();
+        const role = newEmployee.getRole();
+        let card;
 
+        if (role === 'Manager') {
+            const office = newEmployee.getOfficeNumber();
+            card = `<div class="card">
+            <div class="card-header">
+                ${name}
+                <br>
+                <i class="fas fa-coffee"></i> ${role}
+            </div>
+            <div class="card-body">
+                <p class="cardtext">ID: ${id}</p>
+                <p class="cardtext">Email: <a href="mailto:${email}">${email}</a></p>
+                <p class="cardtext">Office Number: ${office}</p>
+            </div>
+        </div>`
+        }
+        if (role === 'Engineer') {
+            const gitHub = newEmployee.getGitHub();
+            card = `<div class="card">
+            <div class="card-header">
+                ${name}
+                <br>
+                <i class="fas fa-glasses"></i> ${role}
+            </div>
+            <div class="card-body">
+                <p class="cardtext">ID: ${id}</p>
+                <p class="cardtext">Email: <a href="mailto:${email}">${email}</a></p>
+                <p class="cardtext">GitHub: <a href="https://github.com/${gitHub}" target="_blank" >${gitHub}</a></p>
+            </div>
+        </div>`
+        }
+        if (role === 'Intern') {
+            const school = newEmployee.getSchool();
+            card = `<div class="card">
+            <div class="card-header">
+                ${name}
+                <br>
+                <i class="fas fa-glasses"></i> ${role}
+            </div>
+            <div class="card-body">
+                <p class="cardtext">ID: ${id}</p>
+                <p class="cardtext">Email: <a href="mailto:${email}">${email}</a></p>
+                <p class="cardtext">School: ${school}</p>
+            </div>
+        </div>`
+        }
+        console.log('Adding new employee to HTML.');
+        fs.appendFile('./dist/teamProfile.html', card, function (err) {
+            if (err) {
+                return rej(err);
+            };
+            return res();
+        });
+    });
+}
+
+function endHTML() { 
+    const main = ` </div>
+    </body>
+    
+    </html>`;
+    fs.appendFile('./dist/teamProfile.html', main, function (err) { 
+        if (err) { 
+            console.log(err);
+        };
+        console.log('HTML file is ready to go. It can be found in the dist folder.')
+    });
 }
 //Function to start app
 add();
